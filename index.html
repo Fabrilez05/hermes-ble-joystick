@@ -7,12 +7,30 @@
     <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
-    <div id = "joystick_Base">
-    <div id = "joystick_Stick"></div>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="logo-slot" aria-label="Logo placeholder">Logo</div>
+            <div class="brand-block">
+                <p class="eyebrow">Control Panel</p>
+                <h1>Hermes</h1>
+            </div>
+        </header>
+
+        <main class="control-panel">
+            <div class="joystick-wrap">
+                <div id="joystick_Base" aria-label="Joystick control">
+                    <div id="joystick_Stick"></div>
+                </div>
+            </div>
+
+            <div class="readout">
+                <p>Eje X: <span id="x-val">0</span></p>
+                <p>Eje Y: <span id="y-val">0</span></p>
+            </div>
+
+            <button id="connect-ble-btn" type="button">Connect BLE</button>
+        </main>
     </div>
-    <p>Eje X: <span id="x-val">0</span></p>
-    <p>Eje Y: <span id="y-val">0</span></p>
-    <button id="connect-ble-btn" type="button">Connect BLE</button>
 
     <script src = "joystick.js"></script>
 </body>
