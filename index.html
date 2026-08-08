@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hermes</title>
-    <link rel = "stylesheet" href = "style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-shell">
@@ -28,9 +28,13 @@
                 <p>Eje Y: <span id="y-val">0</span></p>
             </div>
 
-            <button id="connect-ble-btn" type="button">Connect BLE</button>
+            <div class="ble-controls">
+                <button id="connect-ble-btn" type="button">Connect BLE</button>
+                <button id="disconnect-ble-btn" type="button" class="secondary" disabled>Disconnect BLE</button>
+            </div>
         </main>
     </div>
 
-    <script src = "joystick.js"></script>
+    <script src="joystick.js"></script>
 </body>
+</html>

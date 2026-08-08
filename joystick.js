@@ -3,12 +3,27 @@ const stick = document.getElementById('joystick_Stick');
 const xVal = document.getElementById('x-val');
 const yVal = document.getElementById('y-val');
 const connectBleBtn = document.getElementById('connect-ble-btn');
+const disconnectBleBtn = document.getElementById('disconnect-ble-btn');
 
 let isDragging = false;
 let bleCharacteristic = null;
+let bleDevice = null;
 const maxDistance = 75;
 const serviceUUID = 'd3f8007e-c032-43ef-90f7-b042e9910fff';
 const characteristicUUID = 'f85ba695-b4ec-42cf-8127-1c08d2fbce99';
+
+function updateBleButtons() {
+    const connected = !!bleCharacteristic && !!bleDevice;
+
+    if (connectBleBtn) {
+        connectBleBtn.disabled = connected;
+        connectBleBtn.textContent = connected ? 'BLE connected' : 'Connect BLE';
+    }
+
+    if (disconnectBleBtn) {
+        disconnectBleBtn.disabled = !connected;
+    }
+}
 
 function getCenter() {
     const rect = base.getBoundingClientRect();
@@ -75,6 +90,28 @@ document.addEventListener('pointermove', moveStick);
 document.addEventListener('pointerup', resetStick);
 document.addEventListener('pointercancel', resetStick);
 
+async function disconnectBLE() {
+    if (!bleDevice || !bleDevice.gatt) {
+        bleCharacteristic = null;
+        bleDevice = null;
+        updateBleButtons();
+        return;
+    }
+
+    try {
+        if (bleDevice.gatt.connected) {
+            bleDevice.gatt.disconnect();
+        }
+    } catch (error) {
+        console.error('BLE disconnect error:', error);
+    } finally {
+        bleCharacteristic = null;
+        bleDevice = null;
+        updateBleButtons();
+        console.log('BLE disconnected');
+    }
+}
+
 async function connectBLE() {
     if (!navigator.bluetooth) {
         console.error('Holy moly!');
@@ -87,12 +124,12 @@ async function connectBLE() {
             optionalServices: [serviceUUID]
         });
 
+        bleDevice = device;
+
         device.addEventListener('gattserverdisconnected', () => {
             bleCharacteristic = null;
-            if (connectBleBtn) {
-                connectBleBtn.disabled = false;
-                connectBleBtn.textContent = 'Connect BLE';
-            }
+            bleDevice = null;
+            updateBleButtons();
             console.log('BLE disconnected');
         });
 
@@ -100,11 +137,7 @@ async function connectBLE() {
         const service = await server.getPrimaryService(serviceUUID);
         bleCharacteristic = await service.getCharacteristic(characteristicUUID);
 
-        if (connectBleBtn) {
-            connectBleBtn.disabled = true;
-            connectBleBtn.textContent = 'BLE connected';
-        }
-
+        updateBleButtons();
         console.log('Someone who is not afraid to... send a message');
     } catch (error) {
         console.error('All you have to do is not open this bag! ', error);
@@ -114,3 +147,9 @@ async function connectBLE() {
 if (connectBleBtn) {
     connectBleBtn.addEventListener('click', connectBLE);
 }
+
+if (disconnectBleBtn) {
+    disconnectBleBtn.addEventListener('click', disconnectBLE);
+}
+
+updateBleButtons();

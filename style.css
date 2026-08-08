@@ -9,6 +9,8 @@
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
   --primary-soft: #dbeafe;
+  --secondary: #64748b;
+  --secondary-dark: #475569;
   --text-dark: #0f172a;
   --text-muted: #475569;
   --border: rgba(148, 163, 184, 0.6);
@@ -27,7 +29,7 @@ body {
 
 .app-shell {
   width: min(440px, 92vw);
-  background: rgba(248, 250, 252, 0.9);
+  background: rgba(248, 250, 252, 0.92);
   border: 1px solid var(--border);
   border-radius: 22px;
   box-shadow: 0 18px 40px var(--shadow);
@@ -49,7 +51,7 @@ body {
   height: 86px;
   border-radius: 18px;
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 55%, #93c5fd 100%);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(37, 99, 235, 0.25);
   display: grid;
   place-items: center;
   font-size: 0.8rem;
@@ -142,7 +144,14 @@ h1 {
   text-align: center;
 }
 
-#connect-ble-btn {
+.ble-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+button {
   width: 100%;
   border: none;
   border-radius: 12px;
@@ -150,18 +159,32 @@ h1 {
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+#connect-ble-btn {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: white;
-  cursor: pointer;
   box-shadow: 0 12px 22px rgba(37, 99, 235, 0.28);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#connect-ble-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 26px rgba(37, 99, 235, 0.3);
+#disconnect-ble-btn {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+  color: white;
+  box-shadow: 0 10px 18px rgba(71, 85, 105, 0.26);
 }
 
-#connect-ble-btn:active {
-  transform: translateY(0);
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#x-val, #y-val {
+  font-weight: bold;
 }
