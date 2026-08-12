@@ -190,8 +190,17 @@ button:disabled {
 }
 
 .app-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 17px;
+width: 86px;
+  height: 86px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 55%, #93c5fd 100%);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+  font-weight: 700;
+  overflow: hidden;
 }
