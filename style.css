@@ -1,20 +1,42 @@
-* {
+/* Hermes — mismo estilo "papel técnico" que CDR-showcase-congreso */
+
+:root {
+  --fondo: #f5f2e9;
+  --tinta: #163a86;
+  --tarjeta: #fffdf7;
+  --acento: #c8102e;
+  --cuadricula: rgba(22, 58, 134, 0.1);
+  --rayado: rgba(22, 58, 134, 0.07);
+  --linea-suave: rgba(22, 58, 134, 0.25);
+  --texto-boton: #ffffff;
+  --radio: 12px;
+  --borde: 2px solid var(--tinta);
+  --display: 'Barlow Condensed', system-ui, sans-serif;
+  --mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #1c3f91;
+    --tinta: #ffffff;
+    --tarjeta: #1c3f91;
+    --acento: #ffc2c7;
+    --cuadricula: rgba(255, 255, 255, 0.12);
+    --rayado: rgba(255, 255, 255, 0.08);
+    --linea-suave: rgba(255, 255, 255, 0.3);
+    --texto-boton: #1c3f91;
+  }
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-:root {
-  --bg-deep: #0f172a;
-  --bg-panel: #e2e8f0;
-  --bg-soft: #f8fafc;
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --primary-soft: #dbeafe;
-  --secondary: #64748b;
-  --secondary-dark: #475569;
-  --text-dark: #0f172a;
-  --text-muted: #475569;
-  --border: rgba(148, 163, 184, 0.6);
-  --shadow: rgba(15, 23, 42, 0.18);
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -22,70 +44,94 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #dfeaf7 0%, #cbd5e1 35%, #94a3b8 100%);
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--text-dark);
+  padding: 16px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.55;
+  color: var(--tinta);
+  background-color: var(--fondo);
+  background-image:
+    linear-gradient(var(--cuadricula) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cuadricula) 1px, transparent 1px);
+  background-size: 16px 16px;
 }
 
+:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.titulo-display {
+  font-family: var(--display);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.seccion-titulo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid var(--tinta);
+  padding-bottom: 0.25rem;
+  margin: 0 0 0.5rem;
+}
+
+/* Tarjeta principal */
 .app-shell {
-  width: min(440px, 92vw);
-  background: rgba(248, 250, 252, 0.92);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  box-shadow: 0 18px 40px var(--shadow);
-  padding: 26px 24px 22px;
-  backdrop-filter: blur(6px);
+  width: min(440px, 100%);
+  background: var(--tarjeta);
+  border: var(--borde);
+  border-radius: var(--radio);
+  padding: 22px 20px 20px;
 }
 
 .topbar {
   display: flex;
   align-items: center;
-  gap: 18px;
-  margin-bottom: 22px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .logo-slot {
+  flex: none;
   width: 86px;
   height: 86px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 55%, #93c5fd 100%);
-  border: 1px solid rgba(37, 99, 235, 0.25);
   display: grid;
   place-items: center;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--primary-dark);
-  font-weight: 700;
+  background: #fffdf7; /* el logo es azul: necesita fondo claro también en modo oscuro */
+  border: 1.5px solid var(--tinta);
+  border-radius: 8px;
+  padding: 6px;
+  overflow: hidden;
+}
+
+.app-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .brand-block {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.eyebrow {
-  margin: 0;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  flex: 1;
+  min-width: 0;
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
-  color: var(--text-dark);
+  font-size: clamp(2.6rem, 9vw, 3.4rem);
 }
 
+/* Panel */
 .control-panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(226, 232, 240, 0.75));
-  border: 1px solid rgba(148, 163, 184, 0.45);
-  border-radius: 20px;
-  padding: 22px 18px 18px;
+  border-top: 1.5px solid var(--tinta);
+  padding-top: 20px;
 }
 
 .joystick-wrap {
@@ -95,112 +141,98 @@ h1 {
 }
 
 #joystick_Base {
+  position: relative;
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle at 30% 30%, #f8fafc 0%, #cbd5e1 20%, #94a3b8 100%);
-  border: 3px solid rgba(37, 99, 235, 0.5);
+  border: var(--borde);
   border-radius: 50%;
-  position: relative;
-  margin: 0;
   touch-action: none;
-  box-shadow: inset 0 6px 14px rgba(255, 255, 255, 0.8), 0 12px 25px rgba(37, 99, 235, 0.12);
+  background-color: var(--tarjeta);
+  /* mira de cruz + cuadrícula fina, como el papel del fondo */
+  background-image:
+    linear-gradient(var(--linea-suave), var(--linea-suave)),
+    linear-gradient(90deg, var(--linea-suave), var(--linea-suave)),
+    repeating-radial-gradient(circle at center, transparent 0 28px, var(--rayado) 28px 29px);
+  background-size: 1px 100%, 100% 1px, 100% 100%;
+  background-position: center, center, center;
+  background-repeat: no-repeat;
 }
 
 #joystick_Stick {
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #60a5fa 100%);
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
   position: absolute;
   left: 50%;
   top: 50%;
+  width: 72px;
+  height: 72px;
   transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--tinta);
+  border: 3px solid var(--acento);
   cursor: grab;
-  box-shadow: 0 10px 18px rgba(37, 99, 235, 0.35);
 }
 
 #joystick_Stick:active {
   cursor: grabbing;
-  transform: translate(-50%, -50%) scale(1.03);
 }
 
 .readout {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin: 0 10px 18px;
-  font-size: 0.95rem;
-  color: var(--text-dark);
+  margin-bottom: 18px;
+  font-size: 0.9rem;
 }
 
 .readout p {
+  flex: 1;
   margin: 0;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(219, 234, 254, 0.7);
-  border: 1px solid rgba(96, 165, 250, 0.35);
-  min-width: 110px;
+  padding: 0.4rem 0.6rem;
   text-align: center;
+  background: var(--tarjeta);
+  border: 1.5px solid var(--tinta);
+  border-radius: 8px;
 }
 
+#x-val,
+#y-val {
+  display: inline-block;
+  min-width: 4ch;
+  font-weight: 700;
+  color: var(--acento);
+}
+
+/* Botones */
 .ble-controls {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 8px;
 }
 
 button {
   width: 100%;
-  border: none;
-  border-radius: 12px;
-  padding: 14px 16px;
-  font-size: 1rem;
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--tinta);
+  border-radius: 8px;
+  font: inherit;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  background: var(--tinta);
+  color: var(--texto-boton);
 }
 
-button:hover:not(:disabled) {
-  transform: translateY(-1px);
-}
-
-#connect-ble-btn {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: white;
-  box-shadow: 0 12px 22px rgba(37, 99, 235, 0.28);
-}
-
-#disconnect-ble-btn {
-  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
-  color: white;
-  box-shadow: 0 10px 18px rgba(71, 85, 105, 0.26);
+button.secondary {
+  background: transparent;
+  color: var(--tinta);
 }
 
 button:disabled {
-  opacity: 0.55;
+  opacity: 0.45;
   cursor: not-allowed;
-  transform: none;
 }
 
-#x-val, #y-val {
-  font-weight: bold;
-}
-
-.app-logo {
-width: 86px;
-  height: 86px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 55%, #93c5fd 100%);
-  border: 1px solid rgba(37, 99, 235, 0.25);
-  display: grid;
-  place-items: center;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--primary-dark);
-  font-weight: 700;
-  overflow: hidden;
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }

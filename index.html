@@ -1,47 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hermes</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Hermes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-shell">
-        <header class="topbar">
-            <div class="logo-slot" aria-label="Logo de Hermes">
-                <img src="LogoCDRazul.png" alt="Logo CDR" class="app-logo">
-            </div>
-            <div class="brand-block">
-                <p class="eyebrow">Control Panel</p>
-                <h1>Hermes</h1>
-            </div>
-        </header>
-            <div class="brand-block">
-                <p class="eyebrow">Control Panel</p>
-                <h1>Hermes</h1>
-            </div>
-        </header>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="logo-slot">
+        <img src="LogoCDRazul.png" alt="Logo CDR" class="app-logo">
+      </div>
+      <div class="brand-block">
+        <p class="seccion-titulo">Panel de control</p>
+        <h1 class="titulo-display">Hermes</h1>
+      </div>
+    </header>
 
-        <main class="control-panel">
-            <div class="joystick-wrap">
-                <div id="joystick_Base" aria-label="Joystick control">
-                    <div id="joystick_Stick"></div>
-                </div>
-            </div>
+    <main class="control-panel">
+      <div class="joystick-wrap">
+        <div id="joystick_Base" aria-label="Joystick de control">
+          <div id="joystick_Stick"></div>
+        </div>
+      </div>
 
-            <div class="readout">
-                <p>Eje X: <span id="x-val">0</span></p>
-                <p>Eje Y: <span id="y-val">0</span></p>
-            </div>
+      <div class="readout mono">
+        <p>Eje X <span id="x-val">0</span></p>
+        <p>Eje Y <span id="y-val">0</span></p>
+      </div>
 
-            <div class="ble-controls">
-                <button id="connect-ble-btn" type="button">Connect BLE</button>
-                <button id="disconnect-ble-btn" type="button" class="secondary" disabled>Disconnect BLE</button>
-            </div>
-        </main>
-    </div>
+      <div class="ble-controls">
+        <button id="connect-ble-btn" type="button">Connect BLE</button>
+        <button id="disconnect-ble-btn" type="button" class="secondary" disabled>Disconnect BLE</button>
+      </div>
+    </main>
+  </div>
 
-    <script src="joystick.js"></script>
+  <script src="joystick.js"></script>
 </body>
 </html>
